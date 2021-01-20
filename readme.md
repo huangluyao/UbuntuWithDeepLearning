@@ -1,32 +1,34 @@
-Ubuntu18.04
+[toc]
 
-#### 1. Install Ubuntu18.04 and update source
+# Ubuntu 18.04 with DeepLearning (cuda10.2 + cudnn8.0 + TensorRT-7.2+ OnnxRuntime1.3)
+
+## 1. Install Ubuntu18.04 and update source
 
 Update to mirrors and install some softwares reference CSDN  [blog](https://blog.csdn.net/hymanjack/article/details/80285400)
 
-#### 2.NVIDIA dirver
+## 2.NVIDIA dirver
 
-1. - remove old dirver
+1. remove old dirver
 
-     ```
-     sudo apt purge nvidia-*
-     ```
+   ```
+   sudo apt purge nvidia-*
+   ```
 
-2. - install dirver
+2. install dirver
 
-     **plane one: Auto install**
+   ```
+   $ sudo add-apt-repository ppa:graphics-drivers/ppa
+   $ sudo apt update
+   $ sudo ubuntu-drivers autoinstall
+   ```
 
-     ```
-     sudo ubuntu-drivers autoinstall
-     ```
+3. Check 
 
-     **plane two: Add PPA to install the latest version of the driver**
+   ```
+   nvidia-smi
+   ```
 
-     ```
-     sudo add-apt-repository ppa:graphics-drivers/ppa
-     ```
-
-#### 3. Install CUDA and CUDANN
+## 3. Install CUDA and CUDANN
 
 1. Download [cuda-10.2](https://developer.nvidia.com/cuda-10.2-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1604&target_type=runfilelocal) or other [version](https://developer.nvidia.com/cuda-toolkit-archive) 
 
@@ -72,11 +74,11 @@ Update to mirrors and install some softwares reference CSDN  [blog](https://blog
    nvcc -V
    ```
 
-#### 4. Pytorch Install
+## 4. Pytorch Install
 
 See [Pytorch](https://pytorch.org/get-started/locally/) to choice pytorch version
 
-#### 5.Install TensorRT
+## 5.Install TensorRT
 
 1. Download [tensorrt7.2.1 for cuda 10.2](https://developer.nvidia.com/compute/machine-learning/tensorrt/secure/7.2.1/tars/TensorRT-7.2.1.6.Ubuntu-18.04.x86_64-gnu.cuda-10.2.cudnn8.0.tar.gz) or other [version](https://developer.nvidia.com/nvidia-tensorrt-7x-download):
 
@@ -112,7 +114,7 @@ pip install onnx_graphsurgeon/onnx_graphsurgeon-0.2.6-py2.py3-none-any.whl
     Add environment variable:
 
     ```
-    sudo gedit ~/.bashrc
+    $ sudo gedit ~/.bashrc
     ```
 
     ```
@@ -125,7 +127,7 @@ pip install onnx_graphsurgeon/onnx_graphsurgeon-0.2.6-py2.py3-none-any.whl
     ./sample_mnist
     ```
 
-#### 6. Install OnnxRuntime
+## 6. Install OnnxRuntime
 
 Download source
 
