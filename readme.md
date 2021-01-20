@@ -1,13 +1,10 @@
-[toc]
-# Ubuntu 18.04 with DeepLearning (cuda10.2 + cudnn8.0 + TensorRT-7.2+ OnnxRuntime1.3)
-## 1. Install Ubuntu18.04 and update source
-## 2.NVIDIA dirver
-## 3. Install CUDA and CUDANN
-## 4. Pytorch Install
-## 5.Install TensorRT
-## 6. Install OnnxRuntime
-
-
+[Ubuntu 18.04 with DeepLearning (cuda10.2 + cudnn8.0 + TensorRT-7.2+ OnnxRuntime1.3)](# # Ubuntu 18.04 with DeepLearning (cuda10.2 + cudnn8.0 + TensorRT-7.2+ OnnxRuntime1.3))
+* [1. Install Ubuntu18.04 and update source](## 1. Install Ubuntu18.04 and update source)
+* [2.NVIDIA dirver](## 2.NVIDIA dirver)
+* [3. Install CUDA and CUDANN](## 3. Install CUDA and CUDANN)
+* [4. Pytorch Install](## 4. Pytorch Install)
+* [5.Install TensorRT](## 5.Install TensorRT)
+* [6. Install OnnxRuntime](## 6. Install OnnxRuntime)
 # Ubuntu 18.04 with DeepLearning (cuda10.2 + cudnn8.0 + TensorRT-7.2+ OnnxRuntime1.3)
 
 ## 1. Install Ubuntu18.04 and update source
