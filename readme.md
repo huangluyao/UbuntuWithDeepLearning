@@ -35,27 +35,21 @@ Update to mirrors and install some softwares reference CSDN  [blog](https://blog
    $ sudo sh cuda_10.2.89_440.33.01_linux.run
    ```
 
-2. Download [cudann7.6.5 for CUDA 10.2](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/7.6.5.32/Production/10.2_20191118/cudnn-10.2-linux-x64-v7.6.5.32.tgz) or other [version](https://developer.nvidia.com/rdp/cudnn-archive)
+2. Download [cudann-8.02 for CUDA 10.2](https://developer.nvidia.com/compute/machine-learning/cudnn/secure/8.0.2.39/10.2_20200724/cudnn-10.2-linux-x64-v8.0.2.39.tgz) or other [version](https://developer.nvidia.com/rdp/cudnn-archive)
 
-   Install cudann:
+   Copy the following files into the CUDA Toolkit directory:
 
    ```
-   tar -axvf cudnn-10.2-linux-x64-v7.6.5.32.tgz 
-   sudo cp cuda/include/cudnn.h /usr/local/cuda-10.2/include/ 
-   sudo cp cuda/lib64/libcudnn* /usr/local/cuda-10.2/lib64/ 
-   sudo chmod a+r /usr/local/cuda-10.2/include/cudnn.h 
-   sudo chmod a+r /usr/local/cuda-10.2/lib64/libcudnn*
+   $ tar -xzvf cudnn-x.x-linux-x64-v8.x.x.x.tgz
+   $ sudo cp cuda/include/cudnn*.h /usr/local/cuda/include
+   $ sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64
+   $ sudo chmod a+r /usr/local/cuda/include/cudnn*.h /usr/local/cuda/lib64/libcudnn*
+   ```
    
-   sudo cp cuda/include/cudnn.h /usr/local/cuda/include/ 
-   sudo cp cuda/lib64/libcudnn* /usr/local/cuda/lib64/ 
-   sudo chmod a+r /usr/local/cuda/include/cudnn.h 
-   sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
-   ```
-
    See cudann version:
-
+   
    ```
-   cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+   cat /usr/local/cuda/include/cudnn_cnn_infer.h | grep CUDNN_CNN_INFER_MAJOR -A 2
    ```
 
 3. Add environment variable
@@ -80,5 +74,80 @@ Update to mirrors and install some softwares reference CSDN  [blog](https://blog
 
 #### 4. Pytorch Install
 
-​	See [Pytorch](https://pytorch.org/get-started/locally/) to choose pytorch version
+See [Pytorch](https://pytorch.org/get-started/locally/) to choice pytorch version
+
+#### 5.Install TensorRT
+
+1. Download [tensorrt7.2.1 for cuda 10.2](https://developer.nvidia.com/compute/machine-learning/tensorrt/secure/7.2.1/tars/TensorRT-7.2.1.6.Ubuntu-18.04.x86_64-gnu.cuda-10.2.cudnn8.0.tar.gz) or other [version](https://developer.nvidia.com/nvidia-tensorrt-7x-download):
+
+```
+tar -xzvf TensorRT-7.2.1.6.Ubuntu-18.04.x86_64-gnu.cuda-10.2.cudnn8.0.tar.gz
+```
+
+2. Installation package
+
+```
+pip install python/tensorrt-7.2.1.6-cp36-none-linux_x86_64.whl 
+pip install uff/uff-0.6.9-py2.py3-none-any.whl
+pip install onnx_graphsurgeon/onnx_graphsurgeon-0.2.6-py2.py3-none-any.whl 
+```
+
+ 3. Test mnist_sample by C++
+
+    Compile sample program:
+
+    ```
+    $ cd sample
+    $ make clean
+    $ make
+    ```
+
+    Get mnist data:
+
+    ```
+    $ cd ../data/mnist
+    $ python download_pgms.py
+    ```
+
+    Add environment variable:
+
+    ```
+    sudo gedit ~/.bashrc
+    ```
+
+    ```
+    export LD_LIBRARY_PATH=$LD_LIRARY_PATH:{TensrRT Path}/TensorRT-7.2.1.6/lib
+    ```
+
+    Restart Terminal and under folder TensorRT-7.2.1.6/bin to use
+
+    ```
+    ./sample_mnist
+    ```
+
+#### 6. Install OnnxRuntime
+
+Download source
+
+```
+git clone -b rel-1.3.0 --recursive https://github.com/Microsoft/onnxruntime
+```
+
+or use mirror:
+
+```
+git clone -b rel-1.3.0 --recursive https://github.com.cnpmjs.org/Microsoft/onnxruntime
+```
+
+Update package
+
+```
+cd onnxruntime && git submodule update --init --recursive
+```
+
+Install
+
+```
+./build.sh --build_shared_lib --config Release --use_cuda --cudnn_home /usr/local/cuda-10.0/ --cuda_home /usr/local/cuda-10.0/ --use_tensorrt --tensorrt_home /home/hly/workspace/library/TensorRT-7.2.1.6 --update --build
+```
 
